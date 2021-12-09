@@ -1,0 +1,29 @@
+@import "../abstracts/variables";
+
+.img-container {
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+}
+
+.logo {
+  height: 3.5rem;
+}
+
+.section-about {
+  background-color: $color-grey-light;
+  padding: 25rem 0;
+  margin-top: -20rem;
+}
+
+.section-features {
+  padding: 25rem 0;
+  @include background-image-with-gradient ('../img/nat-4.jpg', to right bottom, $color-primary-light, $color-primary-dark);
+  transform: skewY(-6deg);
+  margin-top: -10rem;
+
+  & > *{
+      transform: skewY(6deg);
+  }
+
+}

@@ -1,0 +1,43 @@
+@import "../abstracts/variables";
+
+body {
+  font-family: Leto, sans-serif;
+  font-weight: 400;
+  color: $color-grey;
+  line-height: 1.7;
+}
+
+.heading-secondary {
+  display: inline-block;
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-image: linear-gradient(
+    to right,
+    $color-primary-light,
+    $color-primary-dark
+  );
+  -webkit-background-clip: text; /* only shows the background, where the text is */
+  background-clip: text;
+  color: transparent; /* text is transparent so the clipped backround is shown */
+  letter-spacing: 0.2rem;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: skew(20deg, 3deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.2);
+  }
+}
+
+.heading-tertiary {
+  font-size: $font-size-default;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.paragraph {
+  font-size: $font-size-default;
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}

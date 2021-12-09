@@ -1,0 +1,38 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+@mixin column-gutter {
+  &:not(:last-child) {
+    margin-right: $grid-horizontal-gutter;
+  }
+}
+
+@mixin background-image-with-gradient(
+  $image,
+  $direction,
+  $colorStart,
+  $colorFinish
+) {
+  background-image: linear-gradient(
+      $direction,
+      rgba($colorStart, 0.8),
+      rgba($colorFinish, 0.8)
+    ),
+    url($image);
+}
+
+@mixin gradient-text($direction, $colorStart, $colorFinish) {
+  background-image: linear-gradient(
+    $direction,
+    $colorStart,
+    $colorFinish
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

@@ -1,0 +1,26 @@
+@import '../abstracts/animations';
+
+.title-box{
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    color: $color-white;
+    text-transform: uppercase;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    &__main{
+        font-size: 6rem;
+        font-weight: 400;
+        letter-spacing: 3.5rem;
+        animation: leftToRight 1s ease-in;
+    }
+    
+    &__sub{
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1.7rem;
+        animation: rightToLeft 1s ease-in;
+        margin-bottom: 6rem;
+    }
+}

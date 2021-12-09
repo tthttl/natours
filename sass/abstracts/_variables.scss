@@ -1,0 +1,18 @@
+//COLORS
+$color-primary: #7ed56f;
+$color-primary-light: #55c57a;
+$color-primary-dark: #28b485;
+$color-grey: #777;
+$color-white: #fff;
+$color-black: #000;
+$color-grey-light: lighten(grey, 45%);
+
+//GRID
+$grid-width: 114rem;
+$grid-horizontal-gutter: 6rem;
+$grid-vertical-gutter: 8rem;
+$col-one-of-four-width: calc((100% - (#{$grid-horizontal-gutter} * 3)) / 4);
+$col-one-of-three-width: calc((100% - (#{$grid-horizontal-gutter} * 2)) / 3);
+
+//FONT
+$font-size-default: 1.6rem;
