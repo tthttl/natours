@@ -275,8 +275,8 @@
       <section class="section-stories">
         <div class="bg-video">
           <video class="bg-video__content" autoplay muted loop>
-            <source src="img/video.mp4" type="video/mp4">
-            <source src="img/video.webm" type="video/webm">
+            <source src="img/video.mp4" type="video/mp4" />
+            <source src="img/video.webm" type="video/webm" />
             Your video is not supported :(
           </video>
         </div>
@@ -287,30 +287,126 @@
           <div class="row">
             <div class="story">
               <div class="story__shape">
-                <img src="img/nat-8.jpg" alt="Person on a tour" class="story__img">
+                <img
+                  src="img/nat-8.jpg"
+                  alt="Person on a tour"
+                  class="story__img"
+                />
                 <div class="story__caption">Mary Holmes</div>
               </div>
               <div class="story__text">
-                <h3 class="heading-tertiary u-margin-bottom-small">I had the best week ever with my family </h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi aliquam beatae ipsam, doloribus blanditiis repellendus maiores adipisicing elit. Quasi beatae ipsam, doloribus blanditiis repellendus maiores optio ex sunt labore asperiores alias ea cupiditate quidem sapiente incidunt tempora perspiciatis?</p>
+                <h3 class="heading-tertiary u-margin-bottom-small">
+                  I had the best week ever with my family
+                </h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Quasi aliquam beatae ipsam, doloribus blanditiis repellendus
+                  maiores adipisicing elit. Quasi beatae ipsam, doloribus
+                  blanditiis repellendus maiores optio ex sunt labore asperiores
+                  alias ea cupiditate quidem sapiente incidunt tempora
+                  perspiciatis?
+                </p>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="story">
               <div class="story__shape">
-                <img src="img/nat-9.jpg" alt="Person on a tour" class="story__img">
+                <img
+                  src="img/nat-9.jpg"
+                  alt="Person on a tour"
+                  class="story__img"
+                />
                 <div class="story__caption">Sherlock Holmes</div>
               </div>
               <div class="story__text">
-                <h3 class="heading-tertiary u-margin-bottom-small">WOW! My life is completely different now </h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi aliquam beatae ipsam, doloribus blanditiis repellendus maiores adipisicing elit. Quasi beatae ipsam, doloribus blanditiis repellendus maiores optio ex sunt labore asperiores alias ea cupiditate quidem sapiente incidunt tempora perspiciatis?</p>
+                <h3 class="heading-tertiary u-margin-bottom-small">
+                  WOW! My life is completely different now
+                </h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Quasi aliquam beatae ipsam, doloribus blanditiis repellendus
+                  maiores adipisicing elit. Quasi beatae ipsam, doloribus
+                  blanditiis repellendus maiores optio ex sunt labore asperiores
+                  alias ea cupiditate quidem sapiente incidunt tempora
+                  perspiciatis?
+                </p>
               </div>
             </div>
           </div>
 
           <div class="u-margin-top-medium u-center-text">
             <a href="#" class="btn__text">Read all stories &rarr;</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-booking">
+        <div class="grid">
+          <div class="row">
+            <div class="book">
+              <div class="book__form">
+                <form action="#" class="form">
+                  <div class="u-margin-bottom-small">
+                    <h2 class="heading-secondary">Start booking now</h2>
+                  </div>
+                  <div class="form__group">
+                    <input
+                      type="text"
+                      class="form__input"
+                      placeholder="Full Name"
+                      required
+                      id="name"
+                    />
+                    <label for="name" class="form__label">Full Name</label>
+                  </div>
+                  <div class="form__group">
+                    <input
+                      type="email"
+                      class="form__input"
+                      placeholder="Email"
+                      required
+                      id="email"
+                    />
+                    <label for="email" class="form__label">Email</label>
+                  </div>
+                  <div class="form__group">
+                    <div class="form__radio-group">
+                      <input
+                        type="radio"
+                        class="form__radio-input"
+                        required
+                        id="small"
+                        name="group-size"
+                      />
+                      <label for="small" class="form__radio-label">
+                        <span class="form__radio-button"> </span>
+                        Small Tour Group</label
+                      >
+                    </div>
+                    <div class="form__radio-group">
+                      <input
+                        type="radio"
+                        class="form__radio-input"
+                        required
+                        id="large"
+                        name="group-size"
+                      />
+                      <label for="large" class="form__radio-label"
+                        >
+                        <span class="form__radio-button"> </span>
+                        Large Tour Group</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <button class="btn btn--green">
+                      Next step &rarr;
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </section>

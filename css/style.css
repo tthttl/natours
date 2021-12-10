@@ -148,7 +148,25 @@ body {
   position: relative;
 }
 
-.btn {
+.section-booking {
+  padding: 15rem 0;
+  position: relative;
+  background-image: linear-gradient(to right bottom, #55c57a, #28b485);
+}
+
+.book {
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%, transparent), url(../../img/nat-10.jpg);
+  background-size: cover;
+  height: 50rem;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+}
+.book__form {
+  width: 50%;
+  padding: 6rem;
+}
+
+.btn, .btn:link, .btnvisited {
   display: inline-block;
   text-decoration: none;
   font-size: 1.6rem;
@@ -158,6 +176,8 @@ body {
   transition: all 0.2s;
   position: relative;
   text-transform: uppercase;
+  border: none;
+  cursor: pointer;
 }
 .btn--white {
   background-color: #fff;
@@ -178,7 +198,8 @@ body {
   opacity: 0;
   background-color: rgba(255, 255, 255, 0.8);
 }
-.btn:active {
+.btn:active, .btn:focus {
+  outline: none;
   transform: translateY(0px);
   box-shadow: none;
 }
@@ -195,11 +216,15 @@ body {
   transition: all 0.4s;
 }
 
-.btn__landing, .btn__landing:link, .btn__landing:visited {
+.btn__landing,
+.btn__landing:link,
+.btn__landing:visited {
   animation: fromBottom 1s ease-in;
 }
 
-.btn__text, .btn__text:link, .btn__text:visited {
+.btn__text,
+.btn__text:link,
+.btn__text:visited {
   font-size: 1.6rem;
   display: inline-block;
   text-decoration: none;
@@ -208,13 +233,17 @@ body {
   transition: all 0.2s;
   position: relative;
 }
-.btn__text:hover, .btn__text:link:hover, .btn__text:visited:hover {
+.btn__text:hover,
+.btn__text:link:hover,
+.btn__text:visited:hover {
   background-color: #7ed56f;
   color: #fff;
   transform: translateY(-2px);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 }
-.btn__text:active, .btn__text:link:active, .btn__text:visited:active {
+.btn__text:active,
+.btn__text:link:active,
+.btn__text:visited:active {
   transform: translateY(0);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
@@ -519,6 +548,87 @@ body {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.form__group:not(:last-child) {
+  margin-bottom: 3rem;
+}
+.form__input {
+  display: block;
+  width: 90%;
+  font-family: inherit;
+  color: black;
+  font-size: 1.6rem;
+  padding: 1.5rem 2rem;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+.form__input:focus {
+  outline: none;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  border-bottom: 3px solid #7ed56f;
+}
+.form__input:focus:invalid {
+  border-bottom: 3px solid #ff7730;
+}
+.form__label {
+  display: block;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-left: 2rem;
+  margin-top: 0.7rem;
+  opacity: 1;
+  transition: all 0.4s;
+}
+.form__input:placeholder-shown + .form__label {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4rem);
+}
+.form__radio-group {
+  display: inline-block;
+  width: 49%;
+  margin-bottom: 1rem;
+}
+.form__radio-label {
+  font-size: 1.6rem;
+  cursor: pointer;
+  position: relative;
+  padding-left: 4.5rem;
+}
+.form__radio-button {
+  display: inline-block;
+  position: absolute;
+  top: -0.6rem;
+  left: 0;
+  height: 3rem;
+  width: 3rem;
+  border: 0.5rem solid #7ed56f;
+  border-radius: 50%;
+}
+.form__radio-button::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 1.3rem;
+  width: 1.3rem;
+  border-radius: 50%;
+  background-color: #7ed56f;
+  opacity: 0;
+  transition: all 0.2s;
+}
+.form__radio-input {
+  display: none;
+}
+.form__radio-input:checked ~ .form__radio-label .form__radio-button::after {
+  opacity: 1;
 }
 
 /*# sourceMappingURL=style.css.map */
