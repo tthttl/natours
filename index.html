@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap"
       rel="stylesheet"
     />
 
@@ -23,7 +25,7 @@
       <div class="title-box">
         <div class="title-box__main">Outdoors</div>
         <div class="title-box__sub">is where life happens</div>
-        <a href="#" class="btn btn__landing">Discover our tours</a>
+        <a href="#" class="btn btn--white btn__landing">Discover our tours</a>
       </div>
     </header>
 
@@ -58,11 +60,23 @@
               <a href="#" class="btn__text">Learn more &rarr;</a>
             </div>
             <div class="two-of-four col">
-                <div class="composition">
-                    <img src="img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
-                    <img src="img/nat-2-large.jpg" alt="Photo 2" class="composition__photo composition__photo--p2">
-                    <img src="img/nat-3-large.jpg" alt="Photo 3" class="composition__photo composition__photo--p3">
-                </div>
+              <div class="composition">
+                <img
+                  src="img/nat-1-large.jpg"
+                  alt="Photo 1"
+                  class="composition__photo composition__photo--p1"
+                />
+                <img
+                  src="img/nat-2-large.jpg"
+                  alt="Photo 2"
+                  class="composition__photo composition__photo--p2"
+                />
+                <img
+                  src="img/nat-3-large.jpg"
+                  alt="Photo 3"
+                  class="composition__photo composition__photo--p3"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -75,28 +89,40 @@
               <div class="lifting-card">
                 <i class="lifting-card__icon icon-basic-world"></i>
                 <h3 class="heading-tertiary">Explore the world</h3>
-                <p class="paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus</p>
+                <p class="paragraph">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Repellendus
+                </p>
               </div>
             </div>
             <div class="col one-of-four">
               <div class="lifting-card">
                 <i class="lifting-card__icon icon-basic-compass"></i>
                 <h3 class="heading-tertiary">Meet nature</h3>
-                <p class="paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus</p>
+                <p class="paragraph">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Repellendus
+                </p>
               </div>
             </div>
             <div class="col one-of-four">
               <div class="lifting-card">
                 <i class="lifting-card__icon icon-basic-map"></i>
                 <h3 class="heading-tertiary">Find your way</h3>
-                <p class="paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus</p>
+                <p class="paragraph">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Repellendus
+                </p>
               </div>
             </div>
             <div class="col one-of-four">
               <div class="lifting-card">
                 <i class="lifting-card__icon icon-basic-heart"></i>
                 <h3 class="heading-tertiary">Live a healthy life</h3>
-                <p class="paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus</p>
+                <p class="paragraph">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Repellendus
+                </p>
               </div>
             </div>
           </div>
@@ -104,7 +130,146 @@
       </section>
 
       <section class="section-tours">
-        
+        <div class="u-center-text u-margin-bottom-medium">
+          <h2 class="heading-secondary">Most popular tours</h2>
+        </div>
+        <div class="grid">
+          <div class="row">
+            <div class="col one-of-three">
+              <div class="flipping-card">
+                <div class="flipping-card__side flipping-card__side--front">
+                  <div class="flipping-card__picture flipping-card__picture--1">
+                    &nbsp;
+                  </div>
+                  <h4 class="flipping-card__heading">
+                    <span
+                      class="
+                        flipping-card__heading-span
+                        flipping-card__heading-span--1
+                      "
+                    >
+                      The See Explorer
+                    </span>
+                  </h4>
+                  <div class="flipping-card__details">
+                    <ul>
+                      <li>3 day tours</li>
+                      <li>Up to 30 people</li>
+                      <li>2 tour guides</li>
+                      <li>Sleep in cozy hotels</li>
+                      <li>Difficulty: easy</li>
+                    </ul>
+                  </div>
+                </div>
+                <div
+                  class="
+                    flipping-card__side
+                    flipping-card__side--back
+                    flipping-card__side--back-1
+                  "
+                >
+                  <div class="flipping-card__cta">
+                    <div class="flipping-card__price-box">
+                      <h5 class="flipping-card__text">Only</h5>
+                      <p class="flipping-card__price">$299</p>
+                    </div>
+                    <a href="#" class="btn btn--white">Book now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col one-of-three">
+              <div class="flipping-card">
+                <div class="flipping-card__side flipping-card__side--front">
+                  <div class="flipping-card__picture flipping-card__picture--2">
+                    &nbsp;
+                  </div>
+                  <h4 class="flipping-card__heading">
+                    <span
+                      class="
+                        flipping-card__heading-span
+                        flipping-card__heading-span--2
+                      "
+                    >
+                      The Forest Hiker
+                    </span>
+                  </h4>
+                  <div class="flipping-card__details">
+                    <ul>
+                      <li>7 day tours</li>
+                      <li>Up to 40 people</li>
+                      <li>6 tour guides</li>
+                      <li>Sleep in provided tents</li>
+                      <li>Difficulty: medium</li>
+                    </ul>
+                  </div>
+                </div>
+                <div
+                  class="
+                    flipping-card__side
+                    flipping-card__side--back
+                    flipping-card__side--back-2
+                  "
+                >
+                  <div class="flipping-card__cta">
+                    <div class="flipping-card__price-box">
+                      <h5 class="flipping-card__text">Only</h5>
+                      <p class="flipping-card__price">$499</p>
+                    </div>
+                    <a href="#" class="btn btn--white">Book now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col one-of-three">
+              <div class="flipping-card">
+                <div class="flipping-card__side flipping-card__side--front">
+                  <div class="flipping-card__picture flipping-card__picture--3">
+                    &nbsp;
+                  </div>
+                  <h4 class="flipping-card__heading">
+                    <span
+                      class="
+                        flipping-card__heading-span
+                        flipping-card__heading-span--3
+                      "
+                    >
+                      The Snow Adventurer
+                    </span>
+                  </h4>
+                  <div class="flipping-card__details">
+                    <ul>
+                      <li>5 day tours</li>
+                      <li>Up to 15 people</li>
+                      <li>3 tour guides</li>
+                      <li>Sleep in cozy hotels</li>
+                      <li>Difficulty: hard</li>
+                    </ul>
+                  </div>
+                </div>
+                <div
+                  class="
+                    flipping-card__side
+                    flipping-card__side--back
+                    flipping-card__side--back-3
+                  "
+                >
+                  <div class="flipping-card__cta">
+                    <div class="flipping-card__price-box">
+                      <h5 class="flipping-card__text">Only</h5>
+                      <p class="flipping-card__price">$599</p>
+                    </div>
+                    <a href="#" class="btn btn--white">Book now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="u-margin-top-medium u-center-text">
+          <a href="#" class="btn btn--green">Discover all tours</a>
+        </div>
       </section>
     </main>
 

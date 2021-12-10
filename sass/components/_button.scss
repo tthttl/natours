@@ -1,26 +1,35 @@
-@import '../abstracts/animations';
-@import '../abstracts/variables';
-
-.btn__landing, .btn__landing:link, .btn__landing:visited{
+.btn{
     display: inline-block;
     text-decoration: none;
     font-size: $font-size-default;
     padding: 1.5rem 4rem;
-    background-color: $color-white;
     color: $color-black;
     border-radius: 10rem;
     transition: all 0.2s;
     position:relative;
-    animation: fromBottom 1s ease-in;
+    text-transform: uppercase;
+    
+    &--white{
+        background-color: $color-white;
+    }
+
+    &--green{
+        color: $color-white;
+        background-color: $color-primary;
+
+        &::after{
+            background-color: rgba($color-primary, 0.8);
+        }
+    }
 
     &:hover{
         transform: translateY(-0.3rem);
         box-shadow:  0 0.3rem 1rem rgba($color-black, 0.4);
 
         &::after{
-            transform: scaleX(1.4) scaleY(1.5);
+            transform: scaleX(1.7) scaleY(1.5);
             opacity: 0;
-            background-color: rgba(127, 173, 53, 0.8);
+            background-color: rgba($color-white, 0.8);
         }
     }
     
@@ -41,6 +50,12 @@
         border-radius: 10rem;
         transition: all 0.4s;
     }
+}
+
+
+
+.btn__landing, .btn__landing:link, .btn__landing:visited{
+    animation: fromBottom 1s ease-in;
 }
 
 .btn__text, .btn__text:link, .btn__text:visited{

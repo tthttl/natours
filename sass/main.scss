@@ -1,11 +1,11 @@
-@import 'base/reset';
-@import 'base/typography';
-@import 'base/utilities';
-@import 'base/base';
-@import 'abstracts/mixins';
 @import 'abstracts/variables';
+@import 'abstracts/mixins';
 @import 'abstracts/functions';
 @import 'abstracts/animations';
+@import 'base/reset';
+@import 'base/base';
+@import 'base/typography';
+@import 'base/utilities';
 @import 'pages/home';
 @import 'components/button';
 @import 'components/composition';
@@ -13,4 +13,5 @@
 @import 'components/title-box';
 @import 'layouts/grid';
 @import 'components/lifting-card';
+@import 'components/flipping-card';
 
