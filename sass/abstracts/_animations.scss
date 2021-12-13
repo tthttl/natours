@@ -1,46 +1,106 @@
 @keyframes leftToRight {
-    0% {
-        opacity: 0;
-        transform: translateX(-10rem);
-    }
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
 
-    80%{
-        transform: translate(1rem);
-    }
+  80% {
+    transform: translate(1rem);
+  }
 
-    100%{
-        opacity: 1;
-        transform: translate(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
 
 @keyframes rightToLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(10rem);
-    }
+  0% {
+    opacity: 0;
+    transform: translateX(10rem);
+  }
 
-    80%{
-        transform: translate(-1rem);
-    }
+  80% {
+    transform: translate(-1rem);
+  }
 
-    100%{
-        opacity: 1;
-        transform: translate(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
 
-
 @keyframes fromBottom {
-    0%{
-        opacity: 0;
-        transform: translateY(5rem);
-    }
-    80%{
-        transform: translateY(-.5rem);
-    }
-    100%{
-        opacity: 1;
-        transform: translateY(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(5rem);
+  }
+  80% {
+    transform: translateY(-0.5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fill-up {
+  0% {
+    background-image: linear-gradient(
+      120deg,
+      $color-white 0%,
+      transparent 25%,
+      transparent 50%,
+      transparent 75%,
+      transparent 100%
+    );
+    color: $color-white;
+    transform: translateX(-1rem)
+  }
+  25% {
+    background-image: linear-gradient(
+      120deg,
+      $color-white 0%,
+      $color-white 25%,
+      transparent 50%,
+      transparent 75%,
+      transparent 100%
+    );
+    color: $color-white;
+    transform: translateX(-1rem)
+  }
+  50% {
+    background-image: linear-gradient(
+      120deg,
+      $color-white 0%,
+      $color-white 25%,
+      $color-white 50%,
+      transparent 75%,
+      transparent 100%
+    );
+    color: $color-primary;
+    transform: translateX(-.5rem)
+  }
+  75% {
+    background-image: linear-gradient(
+      120deg,
+      $color-white 0%,
+      $color-white 25%,
+      $color-white 50%,
+      $color-white 75%,
+      transparent 100%
+    );
+    color: $color-primary;
+  }
+  100% {
+    background-image: linear-gradient(
+      120deg,
+      $color-white 0%,
+      $color-white 25%,
+      $color-white 50%,
+      $color-white 75%,
+      $color-white 100%
+    );
+    color: $color-primary;
+  }
 }
