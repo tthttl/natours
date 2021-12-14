@@ -1,6 +1,23 @@
 /* font-size: 10px => to make calculation easy but expressed in procent of the browser default, so user may still be able to change it freely*/
+// font-size: 62.5%; 62.5 * 16px = 10px => on DESKTOP
 html{
-    font-size: 62.5%; /*62.5 * 16px = 10px*/
+    font-size: 30%; /*4,8/16*/
+
+    @include tablet-portrait{
+      font-size: 50%; //8px if basis is 16
+    }
+
+    @include tablet-landscape{
+      font-size: 56.25%; //9px if basis is 16
+    }
+
+    @include desktop{
+      font-size: 62.5%; //10px if basis is 16
+    }
+
+    @include large{
+      font-size: 75%; //12px if basis is 16
+    }
 }
 
 body {

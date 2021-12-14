@@ -1,0 +1,3 @@
+@function convertToEm($valueInPixel, $rootFontSize:16){
+    @return ($valueInPixel / $rootFontSize) * 1em;
+}
