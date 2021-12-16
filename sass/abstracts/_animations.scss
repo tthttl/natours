@@ -55,7 +55,7 @@
       transparent 100%
     );
     color: $color-white;
-    transform: translateX(-1rem)
+    transform: translateX(-1rem);
   }
   25% {
     background-image: linear-gradient(
@@ -67,7 +67,7 @@
       transparent 100%
     );
     color: $color-white;
-    transform: translateX(-1rem)
+    transform: translateX(-1rem);
   }
   50% {
     background-image: linear-gradient(
@@ -79,7 +79,7 @@
       transparent 100%
     );
     color: $color-primary;
-    transform: translateX(-.5rem)
+    transform: translateX(-0.5rem);
   }
   75% {
     background-image: linear-gradient(
@@ -104,3 +104,27 @@
     color: $color-primary;
   }
 }
+
+@keyframes flip-teaser {
+  0% {
+    transform: rotateY(0);
+  }
+  50% {
+    transform: rotateY(-25deg);
+  }
+  100% {
+    transform: rotateY(-50deg);
+  }
+}
+
+@keyframes flip-teaser-back {
+    0% {
+      transform: rotateY(180deg);
+    }
+    50% {
+      transform: rotateY(155deg);
+    }
+    100% {
+      transform: rotateY(130deg);
+    }
+  }

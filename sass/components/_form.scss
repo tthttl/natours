@@ -8,7 +8,7 @@
     width: 90%;
     font-family: inherit;
     color: darken($color-grey, 50%);
-    font-size: $font-size-default;
+    font-size: $font-size-phone;
     padding: 1.5rem 2rem;
     border-radius: 0.5rem;
     background-color: rgba($color-white, 0.4);
@@ -25,6 +25,11 @@
     &:focus:invalid {
       border-bottom: 3px solid $color-secondary-dark;
     }
+
+    @include tablet-landscape{
+      font-size: $font-size-default;
+    }
+
   }
 
   &__label {
@@ -51,10 +56,14 @@
   }
 
   &__radio-label {
-    font-size: $font-size-default;
+    font-size: $font-size-phone;
     cursor: pointer;
     position: relative;
     padding-left: 4.5rem;
+
+    @include tablet-landscape{
+      font-size: $font-size-default;
+    }
   }
 
   &__radio-button {

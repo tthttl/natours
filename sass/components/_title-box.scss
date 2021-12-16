@@ -10,15 +10,23 @@
     &__main{
         font-size: 6rem;
         font-weight: 400;
-        letter-spacing: 3.5rem;
+        letter-spacing: 1rem;
         animation: leftToRight 1s ease-in;
+
+        @include tablet-portrait{
+            letter-spacing: 3.5rem;
+        }
     }
     
     &__sub{
-        font-size: 2rem;
+        font-size: $font-size-phone;
         font-weight: 700;
-        letter-spacing: 1.7rem;
+        letter-spacing: .5rem;
         animation: rightToLeft 1s ease-in;
         margin-bottom: 6rem;
+
+        @include tablet-portrait{
+            letter-spacing: 1.7rem;
+        }
     }
 }

@@ -22,4 +22,8 @@ html{
 
 body {
   box-sizing: border-box;
+
+  @include tablet-landscape{
+    padding: 3rem;
+  }
 }

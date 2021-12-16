@@ -4,7 +4,7 @@
   &visited {
     display: inline-block;
     text-decoration: none;
-    font-size: $font-size-default;
+    font-size: $font-size-phone;
     padding: 1.5rem 4rem;
     color: $color-black;
     border-radius: 10rem;
@@ -13,6 +13,12 @@
     text-transform: uppercase;
     border: none;
     cursor: pointer;
+
+
+    @include tablet-landscape{
+      font-size: $font-size-default;
+    }
+
   }
 
   &--white {
@@ -69,13 +75,17 @@
 .btn__text,
 .btn__text:link,
 .btn__text:visited {
-  font-size: $font-size-default;
+  font-size: $font-size-phone;
   display: inline-block;
   text-decoration: none;
   color: $color-primary;
   border-bottom: 1px solid $color-primary;
   transition: all 0.2s;
   position: relative;
+
+  @include tablet-portrait{
+    font-size: 2.5rem;
+  }
 
   &:hover {
     background-color: $color-primary;

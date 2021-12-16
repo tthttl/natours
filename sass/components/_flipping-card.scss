@@ -2,19 +2,27 @@
   perspective: 150rem;
   -moz-perspective: 150rem;
   position: relative;
-  height: 50rem;
+  height: 65rem;
+
+  @include tablet-landscape{
+    height: 50rem;
+  }
 
   &__side {
     position: absolute;
     top: 0;
     left: 0;
     backface-visibility: hidden;
-    height: 50rem;
+    height: 65rem;
     width: 100%;
     transition: all 0.8s ease;
     border-radius: 0.5rem;
     box-shadow: 0 1.5rem 4rem rgba($color-black, 0.2);
     overflow: hidden;
+
+    @include tablet-landscape{
+      height: 50rem;
+    }
 
     &--front {
       background-color: $color-white;
@@ -147,8 +155,12 @@
 
       li {
         text-align: center;
-        font-size: 1.5rem;
+        font-size: 3rem;
         padding: 1rem;
+
+        @include tablet-landscape{
+          font-size: 1.5rem;
+        }
 
         &:not(:last-child) {
           border-bottom: 1px solid rgba($color-grey, 0.3);
@@ -170,13 +182,31 @@
   }
 
   &__text {
-    font-size: 1.5rem;
+    font-size: 3rem;
     text-transform: uppercase;
+
+    @include tablet-landscape{
+      font-size: $font-size-default;
+    }
   }
 
   &__price {
     font-size: 6rem;
     font-weight: 100;
     margin-bottom: 3rem;
+  }
+}
+
+.flipping-teaser .flipping-card__side--front{
+  animation: flip-teaser .3s ease-in;
+}
+
+.flipping-teaser.clicked{
+  .flipping-card__side--front {
+    transform: rotateY(0);
+  }
+
+  .flipping-card__side--back {
+    transform: rotateY(180deg);
   }
 }

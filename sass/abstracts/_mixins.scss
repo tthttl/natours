@@ -75,6 +75,12 @@
   }
 }
 
+@mixin desktop-xl{
+  @media(min-width: 1400px){
+    @content;
+  }
+}
+
 @mixin large{
   @media(min-width: 1800px){
     @content;

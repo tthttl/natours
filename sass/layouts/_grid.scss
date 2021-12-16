@@ -1,6 +1,10 @@
 .grid {
-  max-width: $grid-width;
+  max-width: 70rem;
   margin: 0 auto;
+
+  @include tablet-landscape{
+    max-width: $grid-width;
+  }
 
   .row {
     @include clearfix;
@@ -11,27 +15,56 @@
 
     .col {
       float: left;
-      @include column-gutter;
+      margin-bottom: $grid-vertical-gutter;
+
+      @include tablet-landscape {
+        @include column-gutter;
+      }
+
     }
 
     .two-of-four {
-      width: calc((100% - #{$grid-horizontal-gutter}) / 2);
+      width: 100%;
+
+      @include tablet-landscape {
+        width: calc((100% - #{$grid-horizontal-gutter}) / 2);
+      }
     }
 
     .one-of-four {
-      width: $col-one-of-four-width;
+      width: 100%;
+
+      @include tablet-landscape {
+        width: $col-one-of-four-width;
+      }
     }
 
     .three-of-four {
-      width: calc(3* #{$col-one-of-four-width} + (2 * #{$grid-horizontal-gutter}));
+      width: 100%;
+
+      @include tablet-landscape {
+        width: calc(
+          3 * #{$col-one-of-four-width} + (2 * #{$grid-horizontal-gutter})
+        );
+      }
     }
 
     .one-of-three {
-      width: $col-one-of-three-width;
+      width: 100%;
+
+      @include tablet-landscape {
+        width: $col-one-of-three-width;
+      }
     }
 
     .two-of-three {
-      width: calc(2 * #{$col-one-of-three-width} + #{$grid-horizontal-gutter});
+      width: 100%;
+
+      @include tablet-landscape {
+        width: calc(
+          2 * #{$col-one-of-three-width} + #{$grid-horizontal-gutter}
+        );
+      }
     }
   }
 }

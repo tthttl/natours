@@ -7,7 +7,7 @@ body {
 
 .heading-secondary {
   display: inline-block;
-  font-size: 3.5rem;
+  font-size: 4rem;
   text-transform: uppercase;
   font-weight: 700;
   background-image: linear-gradient(
@@ -25,17 +25,30 @@ body {
     transform: skew(20deg, 3deg) scale(1.1);
     text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.2);
   }
+
+  @include tablet-landscape{
+    font-size: 3.5rem;
+  }
+
 }
 
 .heading-tertiary {
-  font-size: $font-size-default;
+  font-size: $font-size-phone;
   font-weight: 700;
   text-transform: uppercase;
+
+  @include tablet-landscape{
+    font-size: $font-size-default;
+  }
 }
 
 .paragraph {
-  font-size: $font-size-default;
+  font-size: $font-size-phone;
   &:not(:last-child) {
     margin-bottom: 3rem;
+  }
+
+  @include tablet-landscape{
+    font-size: $font-size-default;
   }
 }

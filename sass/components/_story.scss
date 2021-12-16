@@ -1,11 +1,14 @@
 .story {
-  width: 75%;
   margin: 0 auto;
   box-shadow: 0 3rem 6rem rgba($color-black, 0.2);
   background-color: rgba($color-white, .4);
   padding: 6rem 6rem 6rem 9rem;
   font-size: $font-size-default;
-  transform: skewX(-12deg);
+
+  @include tablet-landscape{
+    transform: skewX(-12deg);
+    width: 75%;
+  }
 
   &__shape {
     width: 15rem;
@@ -15,9 +18,13 @@
     shape-outside: circle(50% at 50%);
     -webkit-clip-path: circle(50% at 50%);
     clip-path: circle(50% at 50%);
-    transform: translateX(-3rem) skewX(12deg);
+    transform: translateX(-3rem);
     position: relative;
     transition: all 0.2s;
+
+    @include tablet-landscape{
+      transform: translateX(-3rem) skewX(12deg);
+    }
   }
 
   &__img {
@@ -27,7 +34,12 @@
   }
 
   &__text {
-    transform: skewX(12deg);
+    font-size: 2.5rem;
+
+    @include tablet-landscape{
+      font-size: $font-size-default;
+      transform: skewX(12deg);
+    }
   }
 
   &__caption {
@@ -36,11 +48,15 @@
     left: 50%;
     transform: translate(-50%, 20%);
     color: $color-white;
-    font-size: $font-size-default;
+    font-size: $font-size-phone;
     text-transform: uppercase;
     text-align: center;
     opacity: 0;
     transition: all 0.2s;
+
+    @include tablet-landscape{
+      font-size: $font-size-default;
+    }
   }
 
   &:hover &__caption {
