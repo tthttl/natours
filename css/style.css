@@ -416,8 +416,8 @@ body {
   }
   @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
     .header {
-      -webkit-clip-path: polygon(0 0, 100% 0, 100% 90vh, 0 100%);
-      clip-path: polygon(0 0, 100% 0, 100% 90vh, 0 100%);
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
     }
   }
 }
@@ -436,10 +436,13 @@ body {
   font-weight: 400;
   letter-spacing: 1rem;
   animation: leftToRight 1s ease-in;
+  margin-right: -1rem;
 }
 @media (min-width: 600px) {
   .title-box__main {
-    letter-spacing: 3.5rem;
+    font-size: 5.5rem;
+    letter-spacing: 3rem;
+    margin-right: -3rem;
   }
 }
 .title-box__sub {
@@ -448,10 +451,13 @@ body {
   letter-spacing: 0.5rem;
   animation: rightToLeft 1s ease-in;
   margin-bottom: 6rem;
+  margin-right: -0.5rem;
 }
 @media (min-width: 600px) {
   .title-box__sub {
     letter-spacing: 1.7rem;
+    margin-right: -1.7rem;
+    font-size: 1.6rem;
   }
 }
 

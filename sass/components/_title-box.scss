@@ -5,6 +5,7 @@
     color: $color-white;
     text-transform: uppercase;
     transform: translate(-50%, -50%);
+
     text-align: center;
 
     &__main{
@@ -12,9 +13,13 @@
         font-weight: 400;
         letter-spacing: 1rem;
         animation: leftToRight 1s ease-in;
+        margin-right: -1rem;
 
         @include tablet-portrait{
-            letter-spacing: 3.5rem;
+            font-size: 5.5rem;
+            letter-spacing: 3rem;
+            margin-right: -3rem;
+
         }
     }
     
@@ -24,9 +29,12 @@
         letter-spacing: .5rem;
         animation: rightToLeft 1s ease-in;
         margin-bottom: 6rem;
+        margin-right: -.5rem;
 
         @include tablet-portrait{
             letter-spacing: 1.7rem;
+            margin-right: -1.7rem;
+            font-size: $font-size-default;
         }
     }
 }
