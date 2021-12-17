@@ -3,7 +3,7 @@
   padding: 6rem 0;
   font-size: $font-size-phone;
 
-  @include tablet-portrait{
+  @include tablet-landscape{
     padding: 10rem 0;
     font-size: 1.4rem;
   }
@@ -23,10 +23,6 @@
     padding-top: 1rem;
     width: 100%;
     text-align: center;
-
-    @include tablet-portrait{
-        
-      }
   }
 
   &__list {
@@ -65,7 +61,7 @@
     padding-top: 1rem;
     text-align: center;
 
-    @include tablet-portrait{
+    @include tablet-landscape{
         float: right;
     }
 

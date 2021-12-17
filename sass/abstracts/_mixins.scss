@@ -45,12 +45,6 @@
 }
 
 //could be expressed in em also (safari bug) so the breakepoint changes if the ROOT font-size changes (when user zoomes in)
-//values in pixel: 
-//mobile max 600px => should not be needed as it should be mobile first
-//tablet-portrait: min 600px
-//tablet-landscape: min 900px
-//desktop: min 1200px
-//large: min: 1800px
 @mixin phone {
   @media(max-width: 600px){
     @content;

@@ -1,19 +1,28 @@
-@import "../abstracts/variables";
-
 .header {
   @include background-image-with-gradient(
-    "../img/hero.jpg",
+    "../img/hero-small.jpg",
     to right bottom,
     $color-primary-light,
     $color-primary-dark
   );
   background-size: cover;
-  height: 95vh;
+  height: 60vh;
   background-position: top;
-  clip-path: polygon(0 0, 100% 0, 100% 90vh, 0 100%);
   position: relative;
 
-  @include tablet-portrait {
-    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  @include tablet-landscape {
+    height: 95vh;
+    
+    @supports(clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)){
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 90vh, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 90vh, 0 100%);
+    }
+
+    @include background-image-with-gradient(
+    "../img/hero.jpg",
+    to right bottom,
+    $color-primary-light,
+    $color-primary-dark
+  );
   }
 }
