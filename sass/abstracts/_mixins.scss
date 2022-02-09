@@ -44,6 +44,13 @@
   transform: translate(-50%, -50%);
 }
 
+@mixin absolute-bottom{
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -80%);
+}
+
 //could be expressed in em also (safari bug) so the breakepoint changes if the ROOT font-size changes (when user zoomes in)
 @mixin phone {
   @media(max-width: 600px){
