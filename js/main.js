@@ -1,4 +1,12 @@
-const nwaApiBookingPostUrl = 'https://nwa-api-booking.azurewebsites.net';
+const nwaApiBookingPostUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-booking-post';
+const nwaApiBookingConfigUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-config';
+
+const getConfig = async (url) => {
+    const response = await fetch(url, {
+        method: 'GET'
+    });
+    return await response.json();
+}
 
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -47,7 +55,7 @@ const showMessage = (status = 500) => {
     text.innerHTML=`${status===201 ? 'Tour successfully booked!' : 'Oops :( Something went wrong, please try again!'}`;
 }
 
-const postForm = async (url) => {
+const postForm = async (url, functionKey) => {
     const email = document.getElementById('email');
     const name = document.getElementById('name');
     const button = document.querySelector('.form .btn');
@@ -56,9 +64,8 @@ const postForm = async (url) => {
     const selectedTour =  Array.from(radios).find(radio => radio.checked)?.value;
     button.disabled = true;
     const headers = new Headers();
-    headers.append('x-functions-key', process.env.NWA_API_BOOKING_POST_KEY);
-
     try {
+        headers.append('x-functions-key', functionKey);
         const response = await fetch(url, {
             method: 'POST',
             headers,
@@ -75,10 +82,10 @@ const postForm = async (url) => {
         console.log(error);
         showMessage(error.status);
     }
-    //reset form
 }
 
-window.addEventListener("load", (event) => {
+window.addEventListener("load", async (event) => {
+    const {functionKey} = await getConfig(nwaApiBookingConfigUrl);
     if (window.matchMedia('(max-width:600px), (hover:none)').matches) {
         document.querySelectorAll('.flipping-card').forEach((card) => {
             observer.observe(card);
@@ -93,13 +100,11 @@ window.addEventListener("load", (event) => {
     bookingForm.addEventListener('submit', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        postForm(nwaApiBookingPostUrl);
+        postForm(nwaApiBookingPostUrl, functionKey);
     });
     const toastButton = document.querySelector('.toast .btn');
     toastButton.addEventListener('click', () => {
         document.getElementById('toast').classList.remove('toast--visible');
     });
-
-
 }, false);
 
