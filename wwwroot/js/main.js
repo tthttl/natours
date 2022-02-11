@@ -1,5 +1,3 @@
-const nwaApiBookingPostUrl = 'https://nwa-api-booking.azurewebsites.net';
-
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -28,54 +26,38 @@ const closeNavigation = (hamburger) => {
     }
 }
 
-const resetForm = (button, email, name) => {
+const showMessage = (status) => {
     button.disabled = false;
-    if(email){
-        email.value = '';
-    }
-    if(name){
-        name.value = '';
-    }
-}
-
-const showMessage = (status = 500) => {
-    const toast = document.getElementById('toast');
-    toast.classList.add('toast--visible');
-    const header = document.querySelector('.toast__content h2');
-    header.innerHTML=`${status===201 ? 'Success' : 'Error'}`;
-    const text = document.querySelector('.toast__text');
-    text.innerHTML=`${status===201 ? 'Tour successfully booked!' : 'Oops :( Something went wrong, please try again!'}`;
+    alert(status);
 }
 
 const postForm = async (url) => {
     const email = document.getElementById('email');
     const name = document.getElementById('name');
     const button = document.querySelector('.form .btn');
-    
+    const toast = document.getElementById('toast');
     const radios = document.querySelectorAll('[name=tour-type]');
     const selectedTour =  Array.from(radios).find(radio => radio.checked)?.value;
     button.disabled = true;
-    const headers = new Headers();
-    headers.append('x-functions-key', process.env.NWA_API_BOOKING_POST_KEY);
 
     try {
         const response = await fetch(url, {
             method: 'POST',
-            headers,
             body: JSON.stringify({
                 email: email.value,
                 name: name.value,
                 selectedTour
             })
         });
-        resetForm(button, email, name);
+
         showMessage(response.status);
+
     } catch (error) {
-        resetForm(button);
         console.log(error);
-        showMessage(error.status);
+        button.disabled = false;
+        toast.classList.add('toast--visible');
     }
-    //reset form
+    //handle response => show success pop-up, reset form
 }
 
 window.addEventListener("load", (event) => {
@@ -93,7 +75,7 @@ window.addEventListener("load", (event) => {
     bookingForm.addEventListener('submit', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        postForm(nwaApiBookingPostUrl);
+        postForm('https://naturs-api.azurewebsites.net/booking');
     });
     const toastButton = document.querySelector('.toast .btn');
     toastButton.addEventListener('click', () => {
