@@ -458,13 +458,10 @@
     <script src="js/main.js" async defer></script>
     <script>
       function statusChangeCallback(response) {
-        // Called with the results from FB.getLoginStatus().
         console.log("statusChangeCallback");
-        console.log(response); // The current login status of the person.
+        console.log(response);
         if (response.status === "connected") {
           testAPI();
-        } else {
-          document.getElementById("status").innerHTML = "Please log " + "into this webpage.";
         }
       }
 

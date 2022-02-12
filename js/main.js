@@ -50,12 +50,41 @@ const showMessage = (status = 500) => {
     const toast = document.getElementById('toast');
     toast.classList.add('toast--visible');
     const header = document.querySelector('.toast__content h2');
-    header.innerHTML = `${status === 201 ? 'Success' : 'Error'}`;
     const text = document.querySelector('.toast__text');
-    text.innerHTML = `${status === 201 ? 'Tour successfully booked!' : 'Oops :( Something went wrong, please try again!'}`;
+    switch (status) {
+        case 201:
+            header.innerHTML = 'Success';
+            text.innerHTML = 'Tour successfully booked!';
+        case 401:
+            header.innerHTML = 'Login required';
+            text.innerHTML = 'Please login to confirm your booking';
+        default:
+            header.innerHTML = 'Error'
+            text.innerHTML = 'Oops :( Something went wrong, please try again!';
+    }
+
 }
 
-const postForm = async (url, functionKey) => {
+const bookTour = (functionKey) => {
+    FB.getLoginStatus(function (response) {
+        console.log("statusChangeCallback");
+        console.log(response);
+        if (response.status === "connected") {
+            postForm(nwaApiBookingPostUrl, functionKey, response.authResponse);
+        } else {
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    postForm(nwaApiBookingPostUrl, functionKey, response.authResponse);
+                } else {
+                    console.log('User cancelled login or did not fully authorize.');
+                    showMessage();
+                }
+            });
+        }
+    });
+}
+
+const postForm = async (url, functionKey, authResponse) => {
     const email = document.getElementById('email');
     const name = document.getElementById('name');
     const button = document.querySelector('.form .btn');
@@ -66,13 +95,15 @@ const postForm = async (url, functionKey) => {
     const headers = new Headers();
     try {
         headers.append('x-functions-key', functionKey);
+        headers.append('Bearer', authResponse.accessToken);
         const response = await fetch(url, {
             method: 'POST',
             headers,
             body: JSON.stringify({
                 email: email.value,
                 name: name.value,
-                selectedTour
+                selectedTour,
+                userId: authResponse.userID
             })
         });
         resetForm(button, email, name);
@@ -100,7 +131,7 @@ window.addEventListener("load", async (event) => {
     bookingForm.addEventListener('submit', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        postForm(nwaApiBookingPostUrl, functionKey);
+        bookTour(functionKey);
     });
     const toastButton = document.querySelector('.toast .btn');
     toastButton.addEventListener('click', () => {
