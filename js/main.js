@@ -56,9 +56,11 @@ const showMessage = (status = 500) => {
         case 201:
             header.innerHTML = 'Success';
             text.innerHTML = 'Tour successfully booked!';
+            break;
         case 401:
             header.innerHTML = 'Login required';
             text.innerHTML = 'Please login to confirm your booking';
+            break;
         default:
             header.innerHTML = 'Error'
             text.innerHTML = 'Oops :( Something went wrong, please try again!';
