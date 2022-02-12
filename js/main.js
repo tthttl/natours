@@ -1,7 +1,5 @@
 const nwaApiBookingPostUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-booking-post';
 const nwaApiBookingConfigUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-config';
-let userId;
-let accessToken;
 
 const getConfig = async (url) => {
     const response = await fetch(url, {
@@ -87,15 +85,6 @@ const postForm = async (url, functionKey) => {
 }
 
 window.addEventListener("load", async (event) => {
-    FB.getLoginStatus(async (response) =>  {
-        const loginStatus = statusChangeCallback(response);
-        if(loginStatus.status === 'connected'){
-            userId = loginStatus.authResponse.userID;
-            accessToken = loginStatus.authResponse.accessToken;
-        } else {
-            FB.login();
-        }
-    });
     const { functionKey } = await getConfig(nwaApiBookingConfigUrl);
     if (window.matchMedia('(max-width:600px), (hover:none)').matches) {
         document.querySelectorAll('.flipping-card').forEach((card) => {
