@@ -1,6 +1,6 @@
 const nwaApiBookingPostUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-booking-post';
 const nwaApiBookingConfigUrl = 'https://nwa-config.azurewebsites.net/api/nwa-config-get';
-const tokenValidationUrl = 'https://natours.azurewebsites.net/.auth/login/facebook'
+const tokenValidationUrl = 'https://nwa-api-booking.azurewebsites.net/.auth/login/facebook'
 
 const getConfig = async (url) => {
     const response = await fetch(url, {
