@@ -95,8 +95,7 @@ const validateToken = async (accessToken) => {
             access_token: accessToken
         })
     });
-    console.log(response);
-    return response.body.authenticationToken;
+    return response.json();
 }
 
 const postForm = async (functionKey, authResponse) => {
@@ -109,7 +108,7 @@ const postForm = async (functionKey, authResponse) => {
     button.disabled = true;
     const headers = new Headers();
     try {
-        const authenticationToken = await validateToken(authResponse.accessToken);
+        const {authenticationToken} = await validateToken(authResponse.accessToken);
         headers.append('x-functions-key', functionKey);
         headers.append('X-ZUMO-AUTH', authenticationToken);
         const response = await fetch(nwaApiBookingPostUrl, {
