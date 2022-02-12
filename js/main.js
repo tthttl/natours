@@ -1,5 +1,7 @@
 const nwaApiBookingPostUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-booking-post';
 const nwaApiBookingConfigUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-config';
+let userId;
+let accessToken;
 
 const getConfig = async (url) => {
     const response = await fetch(url, {
@@ -38,10 +40,10 @@ const closeNavigation = (hamburger) => {
 
 const resetForm = (button, email, name) => {
     button.disabled = false;
-    if(email){
+    if (email) {
         email.value = '';
     }
-    if(name){
+    if (name) {
         name.value = '';
     }
 }
@@ -50,18 +52,18 @@ const showMessage = (status = 500) => {
     const toast = document.getElementById('toast');
     toast.classList.add('toast--visible');
     const header = document.querySelector('.toast__content h2');
-    header.innerHTML=`${status===201 ? 'Success' : 'Error'}`;
+    header.innerHTML = `${status === 201 ? 'Success' : 'Error'}`;
     const text = document.querySelector('.toast__text');
-    text.innerHTML=`${status===201 ? 'Tour successfully booked!' : 'Oops :( Something went wrong, please try again!'}`;
+    text.innerHTML = `${status === 201 ? 'Tour successfully booked!' : 'Oops :( Something went wrong, please try again!'}`;
 }
 
 const postForm = async (url, functionKey) => {
     const email = document.getElementById('email');
     const name = document.getElementById('name');
     const button = document.querySelector('.form .btn');
-    
+
     const radios = document.querySelectorAll('[name=tour-type]');
-    const selectedTour =  Array.from(radios).find(radio => radio.checked)?.value;
+    const selectedTour = Array.from(radios).find(radio => radio.checked)?.value;
     button.disabled = true;
     const headers = new Headers();
     try {
@@ -85,7 +87,16 @@ const postForm = async (url, functionKey) => {
 }
 
 window.addEventListener("load", async (event) => {
-    const {functionKey} = await getConfig(nwaApiBookingConfigUrl);
+    FB.getLoginStatus(async (response) =>  {
+        const loginStatus = statusChangeCallback(response);
+        if(loginStatus.status === 'connected'){
+            userId = loginStatus.authResponse.userID;
+            accessToken = loginStatus.authResponse.accessToken;
+        } else {
+            FB.login();
+        }
+    });
+    const { functionKey } = await getConfig(nwaApiBookingConfigUrl);
     if (window.matchMedia('(max-width:600px), (hover:none)').matches) {
         document.querySelectorAll('.flipping-card').forEach((card) => {
             observer.observe(card);
