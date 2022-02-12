@@ -1,5 +1,5 @@
 const nwaApiBookingPostUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-booking-post';
-const nwaApiBookingConfigUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-config';
+const nwaApiBookingConfigUrl = 'https://nwa-config.azurewebsites.net/api/nwa-config-get';
 
 const getConfig = async (url) => {
     const response = await fetch(url, {
@@ -70,6 +70,7 @@ const bookTour = (functionKey) => {
         console.log("statusChangeCallback");
         console.log(response);
         if (response.status === "connected") {
+            getConfig(nwaApiBookingConfigUrl);
             postForm(nwaApiBookingPostUrl, functionKey, response.authResponse);
         } else {
             FB.login(function (response) {
