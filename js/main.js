@@ -1,5 +1,6 @@
 const nwaApiBookingPostUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-booking-post';
 const nwaApiBookingConfigUrl = 'https://nwa-config.azurewebsites.net/api/nwa-config-get';
+const tokenValidationUrl = 'https://nwa-api-booking.azurewebsites.net/.auth/login/facebook'
 
 const getConfig = async (url) => {
     const response = await fetch(url, {
@@ -70,12 +71,11 @@ const bookTour = (functionKey) => {
         console.log("statusChangeCallback");
         console.log(response);
         if (response.status === "connected") {
-            getConfig(nwaApiBookingConfigUrl);
-            postForm(nwaApiBookingPostUrl, functionKey, response.authResponse);
+            postForm(functionKey, response.authResponse);
         } else {
             FB.login(function (response) {
                 if (response.authResponse) {
-                    postForm(nwaApiBookingPostUrl, functionKey, response.authResponse);
+                    postForm(functionKey, response.authResponse);
                 } else {
                     console.log('User cancelled login or did not fully authorize.');
                     showMessage();
@@ -85,7 +85,20 @@ const bookTour = (functionKey) => {
     });
 }
 
-const postForm = async (url, functionKey, authResponse) => {
+const validateToken = async (accessToken) => {
+    const headers = new Headers();
+    headers.append('Content-Type', application/json);
+    const response = await fetch(tokenValidationUrl, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            access_token: accessToken
+        })
+    });
+    return response.body.authenticationToken;
+}
+
+const postForm = async (functionKey, authResponse) => {
     const email = document.getElementById('email');
     const name = document.getElementById('name');
     const button = document.querySelector('.form .btn');
@@ -95,9 +108,10 @@ const postForm = async (url, functionKey, authResponse) => {
     button.disabled = true;
     const headers = new Headers();
     try {
+        const authenticationToken = await validateToken(authResponse.accessToken);
         headers.append('x-functions-key', functionKey);
-        headers.append('Bearer', authResponse.accessToken);
-        const response = await fetch(url, {
+        headers.append('X-ZUMO-AUTH', authenticationToken);
+        const response = await fetch(nwaApiBookingPostUrl, {
             method: 'POST',
             headers,
             body: JSON.stringify({
