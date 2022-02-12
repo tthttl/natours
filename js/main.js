@@ -87,7 +87,7 @@ const bookTour = (functionKey) => {
 
 const validateToken = async (accessToken) => {
     const headers = new Headers();
-    headers.append('Content-Type', application/json);
+    headers.append('Content-Type', 'application/json');
     const response = await fetch(tokenValidationUrl, {
         method: 'POST',
         headers,
