@@ -95,6 +95,7 @@ const validateToken = async (accessToken) => {
             access_token: accessToken
         })
     });
+    console.log(response);
     return response.body.authenticationToken;
 }
 
