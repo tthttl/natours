@@ -137,7 +137,7 @@ const getAuthenticationTokenIfLoggedIn = () => {
             const { authenticationToken } = await validateToken(authResponse.accessToken);
             return {
                 authenticationToken,
-                authResponse = response.authResponse
+                authResponse: response.authResponse
             };
         }
         return {
