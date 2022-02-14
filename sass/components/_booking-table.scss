@@ -1,0 +1,10 @@
+.booking-table{
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+
+    &--visible{
+        opacity: 1;
+        visibility: visible;
+    }
+}

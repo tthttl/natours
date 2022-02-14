@@ -27,6 +27,7 @@
     </header>
 
     <main>
+      <img src="" alt="profile-picture" class="profile-picture">
       <div class="navigation">
         <input type="checkbox" class="navigation__checkbox" id="navigation-toggle" />
 
@@ -375,6 +376,14 @@
         </div>
       </section>
 
+      <section id="section-booking-table">
+        <div class="grid">
+          <div class="row">
+            <div class="booking-table"></div>
+          </div>
+        </div>
+      </section>
+
       <footer class="footer">
         <div class="footer__logo-box">
           <picture class="footer__logo">
@@ -455,24 +464,8 @@
         </div>
       </div>
     </main>
-    <script src="js/main.js" async defer></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>
-      function statusChangeCallback(response) {
-        console.log("statusChangeCallback");
-        console.log(response);
-        if (response.status === "connected") {
-          testAPI();
-        }
-      }
-
-      function checkLoginState() {
-        // Called when a person is finished with the Login Button.
-        FB.getLoginStatus(function (response) {
-          // See the onlogin handler
-          statusChangeCallback(response);
-        });
-      }
-
       window.fbAsyncInit = function () {
         FB.init({
           appId: "3222691184684557",
@@ -480,27 +473,8 @@
           xfbml: true,
           version: "v13.0", 
         });
-
-        FB.getLoginStatus(function (response) {
-          statusChangeCallback(response);
-        });
       };
-
-      function testAPI() {
-        // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-        console.log("Welcome!  Fetching your information.... ");
-        FB.api("/me", function (response) {
-          console.log("Successful login for: " + response.name);
-          document.getElementById("status").innerHTML = "Thanks for logging in, " + response.name + "!";
-        });
-      }
     </script>
-
-    <!-- The JS SDK Login Button -->
-
-    <fb:login-button scope="public_profile" onlogin="checkLoginState();"> </fb:login-button>
-
-    <div id="status"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="js/main.js" async defer></script>
   </body>
 </html>

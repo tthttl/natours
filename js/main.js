@@ -1,4 +1,5 @@
 const nwaApiBookingPostUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-booking-post';
+const nwaApiBookingGetUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-booking-get';
 const nwaApiBookingConfigUrl = 'https://nwa-config.azurewebsites.net/api/nwa-config-get';
 const tokenValidationUrl = 'https://nwa-api-booking.azurewebsites.net/.auth/login/facebook'
 
@@ -68,23 +69,20 @@ const showMessage = (status = 500) => {
 
 }
 
-const bookTour = (functionKey) => {
-    FB.getLoginStatus(function (response) {
-        console.log("statusChangeCallback");
-        console.log(response);
-        if (response.status === "connected") {
-            postForm(functionKey, response.authResponse);
-        } else {
-            FB.login(function (response) {
-                if (response.authResponse) {
-                    postForm(functionKey, response.authResponse);
-                } else {
-                    console.log('User cancelled login or did not fully authorize.');
-                    showMessage();
-                }
-            });
-        }
-    });
+const bookTour = async (authenticationToken, functionKey, userId) => {
+    if (authenticationToken && userId) {
+        postForm(functionKey, authenticationToken, userId);
+    } else {
+        FB.login(function (response) {
+            if (response.authResponse) {
+                const validatedToken = await validateToken(authResponse.accessToken);
+                postForm(functionKey, validatedToken, userId);
+            } else {
+                console.log('User cancelled login or did not fully authorize.');
+                showMessage();
+            }
+        });
+    }
 }
 
 const validateToken = async (accessToken) => {
@@ -100,7 +98,7 @@ const validateToken = async (accessToken) => {
     return response.json();
 }
 
-const postForm = async (functionKey, authResponse) => {
+const postForm = async (functionKey, authenticationToken, userId) => {
     const email = document.getElementById('email');
     const name = document.getElementById('name');
     const button = document.querySelector('.form .btn');
@@ -110,7 +108,6 @@ const postForm = async (functionKey, authResponse) => {
     button.disabled = true;
     const headers = new Headers();
     try {
-        const {authenticationToken} = await validateToken(authResponse.accessToken);
         headers.append('x-functions-key', functionKey);
         headers.append('X-ZUMO-AUTH', authenticationToken);
         const response = await fetch(nwaApiBookingPostUrl, {
@@ -120,7 +117,7 @@ const postForm = async (functionKey, authResponse) => {
                 email: email.value,
                 name: name.value,
                 selectedTour,
-                userId: authResponse.userID
+                userId: userId
             })
         });
         resetForm(button, email, name);
@@ -132,6 +129,54 @@ const postForm = async (functionKey, authResponse) => {
     }
 }
 
+const getAuthenticationTokenIfLoggedIn = async () => {
+    FB.getLoginStatus(function (response) {
+        console.log("statusChangeCallback");
+        console.log(response.authResponse);
+        if (response.status === "connected") {
+            const { authenticationToken } = await validateToken(authResponse.accessToken);
+            return {
+                authenticationToken,
+                authResponse = response.authResponse
+            };
+        }
+        return {
+            authenticationToken: undefined,
+            authResponse: undefined
+        };
+    });
+}
+
+const getBookings = async (functionKey, authenticationToken, userId) => {
+    const headers = new Headers();
+    headers.append('x-functions-key', functionKey);
+    headers.append('X-ZUMO-AUTH', authenticationToken);
+    const bookings = await fetch(`${nwaApiBookingGetUrl}?userid=${userId}`, {
+        headers,
+        method: 'GET'
+    });
+    return bookings.json();
+}
+
+const loadUserData = async (functionKey, authenticationToken, userId) => {
+    if (authenticationToken && userId) {
+        FB.api("/me", function (user) {
+            const profilePicture = document.querySelector('.profile-picture');
+            profilePicture.src = user?.picture?.data?.src;
+            profilePicture.classList.add('profile-picture--visible');
+        });
+        const bookings = await getBookings(functionKey, authenticationToken, userId);
+        const bookingTable = document.querySelector('.booking-table');
+        bookings.forEach((booking) => {
+            const bookingElement = document.createElement('div');
+            bookingElement.innerHTML = `Name: ${booking.name} Email: ${booking.email} Tour: ${booking.tourType}`;
+            bookingElement.classList.add('booking-table__element');
+            bookingTable.appendChild(bookingElement);
+        });
+        bookingTable.classList.add('booking-table--visible');
+    }
+}
+
 window.addEventListener("load", async (event) => {
     const { functionKey } = await getConfig(nwaApiBookingConfigUrl);
     if (window.matchMedia('(max-width:600px), (hover:none)').matches) {
@@ -140,6 +185,8 @@ window.addEventListener("load", async (event) => {
             card.addEventListener('click', toggleClickedOnCard(card));
         });
     }
+    const { authenticationToken, authResponse } = getAuthenticationTokenIfLoggedIn();
+    loadUserData(functionKey, authenticationToken, authResponse);
     const hamburger = document.querySelector('.navigation__checkbox');
     document.querySelectorAll('.navigation__link').forEach((navLink) => {
         navLink.addEventListener('click', closeNavigation(hamburger));
@@ -148,7 +195,7 @@ window.addEventListener("load", async (event) => {
     bookingForm.addEventListener('submit', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        bookTour(functionKey);
+        bookTour(authenticationToken, functionKey, authResponse.userID);
     });
     const toastButton = document.querySelector('.toast .btn');
     toastButton.addEventListener('click', () => {
