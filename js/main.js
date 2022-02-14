@@ -69,11 +69,11 @@ const showMessage = (status = 500) => {
 
 }
 
-const bookTour = async (authenticationToken, functionKey, userId) => {
+const bookTour = (authenticationToken, functionKey, userId) => {
     if (authenticationToken && userId) {
         postForm(functionKey, authenticationToken, userId);
     } else {
-        FB.login(function (response) {
+        FB.login(async function (response) {
             if (response.authResponse) {
                 const validatedToken = await validateToken(authResponse.accessToken);
                 postForm(functionKey, validatedToken, userId);
@@ -129,8 +129,8 @@ const postForm = async (functionKey, authenticationToken, userId) => {
     }
 }
 
-const getAuthenticationTokenIfLoggedIn = async () => {
-    FB.getLoginStatus(function (response) {
+const getAuthenticationTokenIfLoggedIn = () => {
+    FB.getLoginStatus(async function (response) {
         console.log("statusChangeCallback");
         console.log(response.authResponse);
         if (response.status === "connected") {
