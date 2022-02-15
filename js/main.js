@@ -73,8 +73,10 @@ const bookTour = async (authenticationToken, functionKey, userId) => {
     if (authenticationToken && userId) {
         postForm(functionKey, authenticationToken, userId);
     } else {
-        const response = await FB.login(async function (response) {
-            return Promise.resolve(response);
+        const response = await new Promise((resolve) => {
+            FB.login(async function (response) {
+                resolve(response);
+            });
         });
         if (response.authResponse) {
             const validatedToken = await validateToken(authResponse.accessToken);
@@ -131,10 +133,12 @@ const postForm = async (functionKey, authenticationToken, userId) => {
 }
 
 const getAuthenticationTokenIfLoggedIn = async () => {
-    const response = await FB.getLoginStatus(function (response) {
-        console.log("statusChangeCallback");
-        console.log(response.authResponse);
-        return Promise.resolve(response);
+    const response = await new Promise((resolve) => {
+        FB.getLoginStatus(function (response) {
+            console.log("statusChangeCallback");
+            console.log(response.authResponse);
+            resolve(response);
+        });
     });
     if (response.status === "connected") {
         const { authenticationToken } = await validateToken(response.authResponse.accessToken);
@@ -162,13 +166,15 @@ const getBookings = async (functionKey, authenticationToken, userId) => {
 
 const loadUserData = async (functionKey, authenticationToken, userId) => {
     if (authenticationToken && userId) {
-        const user = await FB.api("/me", function (user) {
-            return Promise.resolve(user);
+        const user = await new Promise((resolve) => {
+            FB.api("/me", function (user) {
+                resolve(user);
+            });
         });
         const profilePicture = document.querySelector('.profile-picture');
         profilePicture.src = user?.picture?.data?.src;
         profilePicture.classList.add('profile-picture--visible');
-        
+
         const bookings = await getBookings(functionKey, authenticationToken, userId);
         const bookingTable = document.querySelector('.booking-table');
         bookings.forEach((booking) => {
