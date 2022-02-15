@@ -134,7 +134,7 @@ const getAuthenticationTokenIfLoggedIn = () => {
         console.log("statusChangeCallback");
         console.log(response.authResponse);
         if (response.status === "connected") {
-            const { authenticationToken } = await validateToken(authResponse.accessToken);
+            const { authenticationToken } = await validateToken(response.authResponse.accessToken);
             return {
                 authenticationToken,
                 authResponse: response.authResponse
