@@ -69,19 +69,20 @@ const showMessage = (status = 500) => {
 
 }
 
-const bookTour = (authenticationToken, functionKey, userId) => {
+const bookTour = async (authenticationToken, functionKey, userId) => {
     if (authenticationToken && userId) {
         postForm(functionKey, authenticationToken, userId);
     } else {
-        FB.login(async function (response) {
-            if (response.authResponse) {
-                const validatedToken = await validateToken(authResponse.accessToken);
-                postForm(functionKey, validatedToken, userId);
-            } else {
-                console.log('User cancelled login or did not fully authorize.');
-                showMessage();
-            }
+        const response = await FB.login(async function (response) {
+            return Promise.resolve(response);
         });
+        if (response.authResponse) {
+            const validatedToken = await validateToken(authResponse.accessToken);
+            postForm(functionKey, validatedToken, userId);
+        } else {
+            console.log('User cancelled login or did not fully authorize.');
+            showMessage();
+        }
     }
 }
 
@@ -129,22 +130,23 @@ const postForm = async (functionKey, authenticationToken, userId) => {
     }
 }
 
-const getAuthenticationTokenIfLoggedIn = () => {
-    FB.getLoginStatus(async function (response) {
+const getAuthenticationTokenIfLoggedIn = async () => {
+    const response = await FB.getLoginStatus(function (response) {
         console.log("statusChangeCallback");
         console.log(response.authResponse);
-        if (response.status === "connected") {
-            const { authenticationToken } = await validateToken(response.authResponse.accessToken);
-            return {
-                authenticationToken,
-                authResponse: response.authResponse
-            };
-        }
-        return {
-            authenticationToken: undefined,
-            authResponse: undefined
-        };
+        return Promise.resolve(response);
     });
+    if (response.status === "connected") {
+        const { authenticationToken } = await validateToken(response.authResponse.accessToken);
+        return {
+            authenticationToken,
+            authResponse: response.authResponse
+        };
+    }
+    return {
+        authenticationToken: undefined,
+        authResponse: undefined
+    };
 }
 
 const getBookings = async (functionKey, authenticationToken, userId) => {
@@ -160,11 +162,13 @@ const getBookings = async (functionKey, authenticationToken, userId) => {
 
 const loadUserData = async (functionKey, authenticationToken, userId) => {
     if (authenticationToken && userId) {
-        FB.api("/me", function (user) {
-            const profilePicture = document.querySelector('.profile-picture');
-            profilePicture.src = user?.picture?.data?.src;
-            profilePicture.classList.add('profile-picture--visible');
+        const user = await FB.api("/me", function (user) {
+            return Promise.resolve(user);
         });
+        const profilePicture = document.querySelector('.profile-picture');
+        profilePicture.src = user?.picture?.data?.src;
+        profilePicture.classList.add('profile-picture--visible');
+        
         const bookings = await getBookings(functionKey, authenticationToken, userId);
         const bookingTable = document.querySelector('.booking-table');
         bookings.forEach((booking) => {
