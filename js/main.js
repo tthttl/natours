@@ -171,7 +171,7 @@ const loadUserData = async (functionKey, authenticationToken, authResponse) => {
             });
         });
         const profilePicture = document.querySelector('.profile-picture');
-        profilePicture.src = user?.picture?.data?.src;
+        profilePicture.src = user?.picture?.data?.url;
         profilePicture.classList.add('profile-picture--visible');
 
         const bookings = await getBookings(functionKey, authenticationToken, authResponse.userID);
