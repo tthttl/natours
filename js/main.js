@@ -166,7 +166,7 @@ const getBookings = async (functionKey, authenticationToken, userId) => {
 const loadUserData = async (functionKey, authenticationToken, authResponse) => {
     if (authenticationToken && authResponse) {
         const user = await new Promise((resolve) => {
-            FB.api("/me", function (user) {
+            FB.api(`/${authResponse.userID}?fields=id,picture`, function (user) {
                 resolve(user);
             });
         });
