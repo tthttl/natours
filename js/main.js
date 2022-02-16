@@ -176,9 +176,9 @@ const loadUserData = async (functionKey, authenticationToken, authResponse) => {
 
         const bookings = await getBookings(functionKey, authenticationToken, authResponse.userID);
         const bookingTable = document.querySelector('.booking-table');
-        bookings.forEach((booking) => {
+        bookings[0]?.forEach((booking) => {
             const bookingElement = document.createElement('div');
-            bookingElement.innerHTML = `Name: ${booking.name} Email: ${booking.email} Tour: ${booking.tourType}`;
+            bookingElement.innerHTML = `Name: ${booking.user.name} Email: ${booking.user.email} Tour: ${booking.tourType}`;
             bookingElement.classList.add('booking-table__element');
             bookingTable.appendChild(bookingElement);
         });
