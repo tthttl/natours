@@ -1,5 +1,4 @@
-const nwaApiBookingPostUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-booking-post';
-const nwaApiBookingGetUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-booking-get';
+const nwaBookingsApiUrl = 'https://nwa-api-booking.azurewebsites.net/api/nwa-api-bookings';
 const nwaApiBookingConfigUrl = 'https://nwa-config.azurewebsites.net/api/nwa-config-get';
 const tokenValidationUrl = 'https://nwa-api-booking.azurewebsites.net/.auth/login/facebook'
 
@@ -113,7 +112,7 @@ const postForm = async (functionKey, authenticationToken, userId) => {
     try {
         headers.append('x-functions-key', functionKey);
         headers.append('X-ZUMO-AUTH', authenticationToken);
-        const response = await fetch(nwaApiBookingPostUrl, {
+        const response = await fetch(nwaBookingsApiUrl, {
             method: 'POST',
             headers,
             body: JSON.stringify({
@@ -157,7 +156,7 @@ const getBookings = async (functionKey, authenticationToken, userId) => {
     const headers = new Headers();
     headers.append('x-functions-key', functionKey);
     headers.append('X-ZUMO-AUTH', authenticationToken);
-    const bookings = await fetch(`${nwaApiBookingGetUrl}?userid=${userId}`, {
+    const bookings = await fetch(`${nwaBookingsApiUrl}?userid=${userId}`, {
         headers,
         method: 'GET'
     });
