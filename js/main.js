@@ -69,9 +69,9 @@ const showMessage = (status = 500) => {
 
 }
 
-const bookTour = async (authenticationToken, functionKey, userId) => {
-    if (authenticationToken && userId) {
-        postForm(functionKey, authenticationToken, userId);
+const bookTour = async (authenticationToken, functionKey, authResponse) => {
+    if (authenticationToken && authResponse) {
+        postForm(functionKey, authenticationToken, authResponse.userID);
     } else {
         const response = await new Promise((resolve) => {
             FB.login(async function (response) {
@@ -79,8 +79,8 @@ const bookTour = async (authenticationToken, functionKey, userId) => {
             });
         });
         if (response.authResponse) {
-            const validatedToken = await validateToken(authResponse.accessToken);
-            postForm(functionKey, validatedToken, userId);
+            const validatedToken = await validateToken(response.authResponse.accessToken);
+            postForm(functionKey, validatedToken, response.authResponse.userID);
         } else {
             console.log('User cancelled login or did not fully authorize.');
             showMessage();
@@ -164,8 +164,8 @@ const getBookings = async (functionKey, authenticationToken, userId) => {
     return bookings.json();
 }
 
-const loadUserData = async (functionKey, authenticationToken, userId) => {
-    if (authenticationToken && userId) {
+const loadUserData = async (functionKey, authenticationToken, authResponse) => {
+    if (authenticationToken && authResponse) {
         const user = await new Promise((resolve) => {
             FB.api("/me", function (user) {
                 resolve(user);
@@ -175,7 +175,7 @@ const loadUserData = async (functionKey, authenticationToken, userId) => {
         profilePicture.src = user?.picture?.data?.src;
         profilePicture.classList.add('profile-picture--visible');
 
-        const bookings = await getBookings(functionKey, authenticationToken, userId);
+        const bookings = await getBookings(functionKey, authenticationToken, authResponse.userID);
         const bookingTable = document.querySelector('.booking-table');
         bookings.forEach((booking) => {
             const bookingElement = document.createElement('div');
@@ -195,7 +195,7 @@ window.addEventListener("load", async (event) => {
             card.addEventListener('click', toggleClickedOnCard(card));
         });
     }
-    const { authenticationToken, authResponse } = getAuthenticationTokenIfLoggedIn();
+    const { authenticationToken, authResponse } = await getAuthenticationTokenIfLoggedIn();
     loadUserData(functionKey, authenticationToken, authResponse);
     const hamburger = document.querySelector('.navigation__checkbox');
     document.querySelectorAll('.navigation__link').forEach((navLink) => {
@@ -205,7 +205,7 @@ window.addEventListener("load", async (event) => {
     bookingForm.addEventListener('submit', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        bookTour(authenticationToken, functionKey, authResponse.userID);
+        bookTour(authenticationToken, functionKey, authResponse);
     });
     const toastButton = document.querySelector('.toast .btn');
     toastButton.addEventListener('click', () => {
