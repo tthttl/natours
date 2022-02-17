@@ -53,6 +53,7 @@ const showMessage = (status = 500) => {
     const header = document.querySelector('.toast__content h2');
     const text = document.querySelector('.toast__text');
     switch (status) {
+        case 200:
         case 201:
             header.innerHTML = 'Success';
             text.innerHTML = 'Tour successfully booked!';
@@ -70,7 +71,7 @@ const showMessage = (status = 500) => {
 
 const bookTour = async (authenticationToken, functionKey, authResponse) => {
     if (authenticationToken && authResponse) {
-        postForm(functionKey, authenticationToken, authResponse.userID);
+        postForm(functionKey, authenticationToken, authResponse);
     } else {
         const response = await new Promise((resolve) => {
             FB.login(async function (response) {
@@ -79,7 +80,7 @@ const bookTour = async (authenticationToken, functionKey, authResponse) => {
         });
         if (response.authResponse) {
             const validatedToken = await validateToken(response.authResponse.accessToken);
-            postForm(functionKey, validatedToken, response.authResponse.userID);
+            postForm(functionKey, validatedToken, response.authResponse);
         } else {
             console.log('User cancelled login or did not fully authorize.');
             showMessage();
@@ -100,7 +101,7 @@ const validateToken = async (accessToken) => {
     return response.json();
 }
 
-const postForm = async (functionKey, authenticationToken, userId) => {
+const postForm = async (functionKey, authenticationToken, authResponse) => {
     const email = document.getElementById('email');
     const name = document.getElementById('name');
     const button = document.querySelector('.form .btn');
@@ -119,11 +120,12 @@ const postForm = async (functionKey, authenticationToken, userId) => {
                 email: email.value,
                 name: name.value,
                 selectedTour,
-                userId: userId
+                userId: authResponse.userID
             })
         });
         resetForm(button, email, name);
         showMessage(response.status);
+        await loadUserData(functionKey, authenticationToken, authResponse);
     } catch (error) {
         resetForm(button);
         console.log(error);
@@ -163,6 +165,19 @@ const getBookings = async (functionKey, authenticationToken, userId) => {
     return bookings.json();
 }
 
+const mapTourType = (tourType) => {
+    switch (tourType) {
+        case 'tour1':
+            return 'See Explorer';
+        case 'tour2':
+            return 'Forest Hiker';
+        case 'tour3':
+            return 'Snow Adventurer';
+        default:
+            throw new Error('Type is not supported');
+    }
+}
+
 const loadUserData = async (functionKey, authenticationToken, authResponse) => {
     if (authenticationToken && authResponse) {
         const user = await new Promise((resolve) => {
@@ -178,11 +193,12 @@ const loadUserData = async (functionKey, authenticationToken, authResponse) => {
         const bookingTable = document.querySelector('.booking-table');
         bookings[0]?.forEach((booking) => {
             const bookingElement = document.createElement('div');
-            bookingElement.innerHTML = `Name: ${booking.user.name} Email: ${booking.user.email} Tour: ${booking.tourType}`;
+            bookingElement.innerHTML = `Name: ${booking.user.name} Email: ${booking.user.email} Tour: ${mapTourType(booking.tourType)}`;
             bookingElement.classList.add('booking-table__element');
             bookingTable.appendChild(bookingElement);
         });
-        bookingTable.classList.add('booking-table--visible');
+        const section = document.querySelector('.section-booking-table');
+        section.classList.add('section-booking-table--visible');
     }
 }
 

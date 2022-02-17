@@ -16,21 +16,29 @@
 
   &__content {
     @include absolute-bottom;
-    min-height: 25%;
-    width: 75%;
+    width: 100%;
     background-color: $color-white;
     padding: 3rem;
     box-shadow: 0 2rem 4rem rgba($color-black, 0.9);
     border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
-    transform: translate(-50%, -50%) scale(0.5);
     transition: all 0.2s;
+
+    @include tablet-portrait{
+      min-height: 25%;
+      width: 75%;
+      transform: translate(-50%, -50%) scale(0.5);
+    }
   }
 
   &__text {
     font-size: 3rem;
     margin-bottom: 3rem;
+  }
+
+  h2{
+    font-size: 3rem;
   }
 
 }
