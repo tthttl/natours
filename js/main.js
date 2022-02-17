@@ -188,6 +188,9 @@ const loadUserData = async (functionKey, authenticationToken, authResponse) => {
         const profilePicture = document.querySelector('.profile-picture');
         profilePicture.src = user?.picture?.data?.url;
         profilePicture.classList.add('profile-picture--visible');
+        profilePicture.addEventListener('click', () => {
+            FB.logout();
+        });
 
         const bookings = await getBookings(functionKey, authenticationToken, authResponse.userID);
         const bookingTable = document.querySelector('.booking-table');
