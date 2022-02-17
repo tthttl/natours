@@ -79,7 +79,7 @@ const bookTour = async (authenticationToken, functionKey, authResponse) => {
             });
         });
         if (response.authResponse) {
-            const validatedToken = await validateToken(response.authResponse.accessToken);
+            const { authenticationToken: validatedToken } = await validateToken(response.authResponse.accessToken);
             postForm(functionKey, validatedToken, response.authResponse);
         } else {
             console.log('User cancelled login or did not fully authorize.');
