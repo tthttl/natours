@@ -192,7 +192,7 @@ const loadUserData = async (functionKey, authenticationToken, authResponse) => {
         const bookings = await getBookings(functionKey, authenticationToken, authResponse.userID);
         const bookingTable = document.querySelector('.booking-table');
         const outDatedElements = document.querySelectorAll('.booking-table__element');
-        Array(outDatedElements).forEach(outDatedElements.remove());
+        Array(outDatedElements).forEach((element) => element.remove());
         bookings[0]?.forEach((booking) => {
             const bookingElement = document.createElement('div');
             bookingElement.innerHTML = `<strong>${mapTourType(booking.tourType)}</strong>  |  ${booking.user.name} 📨 ${booking.user.email}`;
