@@ -74,7 +74,7 @@ const bookTour = async (authenticationToken, functionKey, authResponse) => {
         postForm(functionKey, authenticationToken, authResponse);
     } else {
         const response = await new Promise((resolve) => {
-            FB.login(async function (response) {
+            FB.login(function (response) {
                 resolve(response);
             });
         });
