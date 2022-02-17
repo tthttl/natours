@@ -193,7 +193,7 @@ const loadUserData = async (functionKey, authenticationToken, authResponse) => {
         const bookingTable = document.querySelector('.booking-table');
         bookings[0]?.forEach((booking) => {
             const bookingElement = document.createElement('div');
-            bookingElement.innerHTML = `<strong>${mapTourType(booking.tourType)}</strong> |${booking.user.name} 📨 ${booking.user.email}`;
+            bookingElement.innerHTML = `<strong>${mapTourType(booking.tourType)}</strong>  |  ${booking.user.name} 📨 ${booking.user.email}`;
             bookingElement.classList.add('booking-table__element');
             bookingTable.appendChild(bookingElement);
         });
