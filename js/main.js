@@ -190,7 +190,10 @@ const loadUserData = async (functionKey, authenticationToken, authResponse) => {
         profilePicture.classList.add('profile-picture--visible');
 
         const bookings = await getBookings(functionKey, authenticationToken, authResponse.userID);
-        const bookingTable = document.querySelector('.booking-table');
+        let bookingTable = document.querySelector('.booking-table');
+        bookingTable.remove();
+        bookingTable = document.createElement('div');
+        bookingTable.classList.add('booking-table');
         bookings[0]?.forEach((booking) => {
             const bookingElement = document.createElement('div');
             bookingElement.innerHTML = `<strong>${mapTourType(booking.tourType)}</strong>  |  ${booking.user.name} 📨 ${booking.user.email}`;
